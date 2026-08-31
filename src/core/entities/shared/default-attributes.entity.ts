@@ -6,7 +6,7 @@ export type DefaultAttributesDocument = DefaultAttributes & Document;
 @Schema({ _id: false })
 export class DefaultAttributes {
   @Prop({ required: true, type: String, unique: true })
-  code: string;
+  code!: string;
 
   @Prop({ required: true, type: Date, default: new Date() })
   createdAt?: Date;

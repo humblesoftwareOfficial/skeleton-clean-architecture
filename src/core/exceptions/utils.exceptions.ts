@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 export const ErrorMessages = {
-    INTERNAL_SERVER_ERROR: 'An internal error has occurred. Please try again',
-    ERROR_GETTING_DATA: 'Error while getting data',
-    ERROR_CREATING_DATA: 'Error while creating new ',
-    REQUIRED_FIELD_ERROR: 'Some required field(s) is (are) not provided.',
+    INTERNAL_SERVER_ERROR: 'Une erreur interne est survenue. Veuillez réessayer',
+    ERROR_GETTING_DATA: 'Erreur lors de la récupération des données',
+    ERROR_CREATING_DATA: 'Erreur lors de la création',
+    REQUIRED_FIELD_ERROR: "Un ou plusieurs champs obligatoires ne sont pas fournis.",
   };
   

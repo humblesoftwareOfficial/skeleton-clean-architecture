@@ -5,7 +5,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthenticationController } from './authentication.controller';
 import { AuthenticationService } from './authentication.service';
 import { JwtStrategy } from './jwt.strategy';
-import { DataServicesModule } from 'src/core/abstracts/abstract.data-services.module';
+import { DataServicesModule } from '../../core/abstracts/abstract.data-services.module';
 
 @Module({
   controllers: [AuthenticationController],

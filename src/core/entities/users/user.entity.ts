@@ -6,16 +6,16 @@ export type UserDocument = User & Document;
 @Schema({})
 export class User extends DefaultAttributes {
   @Prop({ required: true, type: String })
-  firstName: string;
+  firstName!: string;
 
   @Prop({ required: true, type: String })
-  lastName: string;
+  lastName!: string;
 
   @Prop({ type: String, unique: true, sparse: true })
-  phone: string;
+  phone?: string;
 
   @Prop({ type: String, unique: true, sparse: true })
-  email: string;
+  email?: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

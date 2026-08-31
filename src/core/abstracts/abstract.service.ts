@@ -9,7 +9,7 @@ import { Model } from 'mongoose';
 export class MongoDataServices
   implements IGenericDataServices, OnApplicationBootstrap
 {
-  users: UserRepository<User>;
+  users!: UserRepository<User>;
   constructor(
     @InjectModel(User.name)
     private userRepository: Model<User>,

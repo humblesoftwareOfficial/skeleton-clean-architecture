@@ -1,10 +1,13 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
+import { ConfigModule } from '@nestjs/config';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './core/middlewares/logger.middleware';
-import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './features/users/users.module';
 import { AuthenticationModule } from './features/authentication/authentication.module';
+import { JwtAuthGuard } from './features/authentication/jwt.auth.guard';
 
 @Module({
   imports: [
@@ -12,11 +15,27 @@ import { AuthenticationModule } from './features/authentication/authentication.m
       isGlobal: true,
       envFilePath: ['.env', `.${process.env.NODE_ENV}.env`],
     }),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60000,
+        limit: 10,
+      },
+    ]),
     UsersModule,
-    AuthenticationModule
+    AuthenticationModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

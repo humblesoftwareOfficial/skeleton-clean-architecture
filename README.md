@@ -26,6 +26,19 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Squelette d'architecture
+
+Ce dépôt est le squelette de référence de l'architecture clean/NestJS utilisée sur nos projets.
+Avant toute génération de code sur un projet cloné à partir de ce squelette, se référer au
+**context pack** (`digital-factory-context.md`) qui documente les conventions obligatoires :
+structure `core/` vs `features/`, gestion des erreurs, sécurité (guard global, validation,
+rate limiting), et le format de réponse HTTP (`succeed()` / `fail()`).
+
+L'infrastructure suivante est fournie par le squelette et ne doit pas être régénérée :
+- `main.ts` (filtre d'exception, `ValidationPipe`, préfixe `/api`, Swagger, CORS, helmet)
+- Guard JWT global (`JwtAuthGuard` en `APP_GUARD`) + décorateur `@Public()`
+- `core/exceptions/`, `core/abstracts/abstract.module.ts` (binding Mongoose)
+
 ## Installation
 
 ```bash

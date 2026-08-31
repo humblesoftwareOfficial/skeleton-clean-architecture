@@ -15,6 +15,4 @@ export abstract class IGenericRepository<T> {
   ): Promise<T[]>;
 }
 
-export abstract class IUserRepository<T> {
-  
-}
+export abstract class IUserRepository<T> {}

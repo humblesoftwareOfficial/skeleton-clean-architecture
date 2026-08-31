@@ -14,11 +14,15 @@ export class HttpExceptionFilter implements ExceptionFilter {
       exception instanceof HttpException
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
+    const exceptionResponse = exception?.getResponse ? exception.getResponse() : undefined;
+    const message =
+      exceptionResponse && typeof exceptionResponse === 'object' && 'message' in exceptionResponse
+        ? (exceptionResponse as { message: unknown }).message
+        : exceptionResponse ?? ErrorMessages.INTERNAL_SERVER_ERROR;
+
     response.status(status).json({
       code: status,
-      message: exception?.getResponse
-        ? exception?.getResponse()['message'] || exception?.getResponse()
-        : ErrorMessages.INTERNAL_SERVER_ERROR,
+      message,
       data: null,
       success: false,
       timestamp: new Date().toISOString(),

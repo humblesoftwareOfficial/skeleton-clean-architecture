@@ -10,7 +10,7 @@ import { MongoDataServices } from './abstract.service';
     MongooseModule.forRootAsync({
       useFactory: (configService: ConfigService) => ({
         uri: configService.getOrThrow<string>('DB_URL'),
-        dbName: configService.get<string>('DB_NAME'),
+        dbName: configService.getOrThrow<string>('DB_NAME'),
       }),
       inject: [ConfigService],
     }),
